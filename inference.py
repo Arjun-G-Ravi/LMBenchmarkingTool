@@ -1,15 +1,9 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 def generate_response(prompt, temperature=0.01, max_length=200):
-    # tokenizer = AutoTokenizer.from_pretrained("Arjun-G-Ravi/chat-GPT2")
-    # model = AutoModelForCausalLM.from_pretrained("Arjun-G-Ravi/chat-GPT2")
-    # Load model directly
-    from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+    tokenizer = AutoTokenizer.from_pretrained("Arjun-G-Ravi/chat-GPT2")
+    model = AutoModelForCausalLM.from_pretrained("Arjun-G-Ravi/chat-GPT2")
 
-
-
-    tokenizer = AutoTokenizer.from_pretrained("tilyupo/t5-small-mmlu-qa2a")
-    model = AutoModelForSeq2SeqLM.from_pretrained("tilyupo/t5-small-mmlu-qa2a")
         
     encoding = tokenizer(
         prompt,
