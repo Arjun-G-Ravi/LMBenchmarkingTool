@@ -4,4 +4,6 @@
   - [ ] gemma
   - [ ] llama
   - [ ] deepseek
-- [ ] There is mmlu code in test.ipynb. Write it as a class
+- [x] There is mmlu code in test.ipynb. Write it as a class
+- [ ] Evaluate different LLMS(above ones) on MMLU
+- [ ] Make it an option to interchange the choices in mmlu
