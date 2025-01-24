@@ -1,5 +1,5 @@
 class LLM:
-    def __init__(self, model_name, temperature=0.1, max_length=80, base_prompt='', device='cuda', calculate_loss=False):
+    def __init__(self, model_name, temperature=0.1, max_length=80, base_prompt='', device='cuda', calculate_loss=True):
         from transformers import pipeline 
         self.generator = pipeline(
         'text-generation', 
