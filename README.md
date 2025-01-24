@@ -19,7 +19,6 @@ I want to  be able to do:
 ```python
 from LMBenchmarkingTool import Benchmark
 model = huggingface-model()
-benchmark = Benchmark()
+benchmark = Benchmark('benchmark_name', 'subset_name', 'metric_name')
 benchmark.run(model)
-
 ```

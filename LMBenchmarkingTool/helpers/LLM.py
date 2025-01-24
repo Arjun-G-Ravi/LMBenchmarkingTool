@@ -29,7 +29,6 @@ class LLM:
         if add_base_prompt: text = self.base_prompt+text
         inputs = self.tokenizer(text, return_tensors="pt", add_special_tokens=True)
         
-        # Compute loss
         with torch.no_grad():
             outputs = self.model(
                 input_ids=inputs['input_ids'], 
@@ -37,10 +36,7 @@ class LLM:
                 labels=inputs['input_ids']
             )
             loss = outputs.loss.item()
-        
             return loss
-
-
 
 
 if __name__ == '__main__':
