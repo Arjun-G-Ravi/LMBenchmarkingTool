@@ -1,5 +1,5 @@
 class LLM:
-    def __init__(self, model_name, temperature=0.1, max_length=80, device='cuda'):
+    def __init__(self, model_name, temperature=0.1, max_length=80, base_prompt='', device='cuda', calculate_loss=False):
         from transformers import pipeline 
         self.generator = pipeline(
         'text-generation', 
@@ -10,9 +10,22 @@ class LLM:
         truncation=True)
         self.temperature = temperature
         self.max_length = max_length
+        self.base_prompt = base_prompt
 
-    def generate_response(self, text, base_prompt='',):
-        return self.generator(text, num_return_sequences=1)[0]['generated_text']
+        # if calculate_loss:
+        #     self
+
+    def generate_response(self, text, add_base_prompt=True):
+        if add_base_prompt: return self.generator(self.base_prompt+text, num_return_sequences=1)[0]['generated_text']
+        else: return self.generator(text, num_return_sequences=1)[0]['generated_text']
+    
+    def calculate_loss(self, text, add_base_prompt=True):
+        if add_base_prompt: text = self.base_prompt+text
+        self.generator.loss
+
+
+
+
 
 if __name__ == '__main__':
     model = LLM("Arjun-G-Ravi/chat-GPT2")
