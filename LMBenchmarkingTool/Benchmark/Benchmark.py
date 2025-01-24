@@ -10,8 +10,8 @@ class Benchmark:
             from LMBenchmarkingTool.Benchmark import MMLU
             self.benchmark = MMLU(subset=self.subset)
     
-    def run(self, model):
-        self.benchmark.run(model)
+    def run(self, model, num_samples=None):
+        self.benchmark.run(model, num_samples=num_samples)
 
 
 if __name__ == '__main__':
@@ -19,5 +19,5 @@ if __name__ == '__main__':
     from warnings import filterwarnings
     filterwarnings('ignore')
     model = LLM('gpt2', calculate_loss=True)
-    benchmark = Benchmark('mmlu', subset='philosophy')
-    benchmark.run(model)
+    benchmark = Benchmark('mmlu', subset='all')
+    benchmark.run(model, num_samples=30)

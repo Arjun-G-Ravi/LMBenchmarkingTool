@@ -6,15 +6,20 @@ class MMLU:
         if subset: self.ds = load_dataset("cais/mmlu", subset)
         else: self.ds = load_dataset("cais/mmlu", 'all')
     
-    def run(self, model, num_samples=10):
-        print('Running mmlu...')
-        from LMBenchmarkingTool import prompting_template1
+    def run(self, model, num_samples=None):
+        print('MMLU Benchmarking Started...')
+        from LMBenchmarkingTool import prompting_template1, _progress_bar
         score = 0
         mapping = {0:'A', 1:'B', 2:'C', 3:'D'}
         if model.return_loss == False:
             print('Set model.return_loss to be True') # warning
             raise 'Error'
-        for i in range(min(num_samples, len(self.ds['test']))):
+        if num_samples is None:
+            num_samples = len(self.ds['test'])
+        tot = min(num_samples, len(self.ds['test']))
+        print('Total benchmarks:',tot)
+        for i in range(tot):
+            _progress_bar(i, tot)
             question = self.ds['test']['question'][i]
             choices = self.ds['test']['choices'][i]
             choices_out = ''
@@ -41,9 +46,9 @@ class MMLU:
         
         print(f'-'*20)
         print('BENCHMARKING RESULTS:')
-        print(f'Total questions: {i+1}')
+        print(f'Total questions: {tot}')
         print(f'Correct Answers {score}' )
-        print(f'MMLU Benchmarking Score: {(score*100/i+1):3f}')
+        print(f'MMLU Benchmarking Score: {(score*100/(i+1)):.3f}')
 
         
 
