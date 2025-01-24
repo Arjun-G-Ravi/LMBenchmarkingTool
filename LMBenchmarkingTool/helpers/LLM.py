@@ -18,6 +18,7 @@ class LLM:
             self.model = AutoModelForCausalLM.from_pretrained(model_name)
             self.tokenizer =  AutoTokenizer.from_pretrained(model_name)
 
+
     def generate_response(self, text, add_base_prompt=True):
         if add_base_prompt: return self.generator(self.base_prompt+text, num_return_sequences=1)[0]['generated_text']
         else: return self.generator(text, num_return_sequences=1)[0]['generated_text']

@@ -1,4 +1,3 @@
-
 class Benchmark:
     def __init__(self, benchmark_name, metrics='accuracy', subset=None):
         self.benchmark_name = benchmark_name
@@ -15,8 +14,10 @@ class Benchmark:
         self.benchmark.run(model)
 
 
-# if __name__ == '__main__':
-
-    
-        
-
+if __name__ == '__main__':
+    from LMBenchmarkingTool import Benchmark, LLM
+    from warnings import filterwarnings
+    filterwarnings('ignore')
+    model = LLM('gpt2', calculate_loss=True)
+    benchmark = Benchmark('mmlu', subset='philosophy')
+    benchmark.run(model)
