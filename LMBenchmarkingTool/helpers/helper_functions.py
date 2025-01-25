@@ -16,5 +16,5 @@ def _progress_bar(current, total, width=50):
     filled = int(width * percent)
     bar = '#' * filled + '-' * (width - filled)
     # Print the progress bar with percentage
-    sys.stdout.write(f'\rProgress: [{bar}] {int(percent * 100)}%')
+    sys.stdout.write(f'\rProgress: [{bar}] ({current}/{total}) {int(percent * 100)}%')
     sys.stdout.flush()

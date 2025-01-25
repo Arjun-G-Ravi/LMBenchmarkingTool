@@ -16,6 +16,7 @@ class MMLU:
             raise 'Error'
         if num_samples is None:
             num_samples = len(self.ds['test'])
+        print(self.ds['test'])
         tot = min(num_samples, len(self.ds['test']))
         print('Total benchmarks:',tot)
         for i in range(tot):

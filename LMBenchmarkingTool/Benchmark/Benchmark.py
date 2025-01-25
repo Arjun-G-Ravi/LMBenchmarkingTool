@@ -18,6 +18,7 @@ if __name__ == '__main__':
     from LMBenchmarkingTool import Benchmark, LLM
     from warnings import filterwarnings
     filterwarnings('ignore')
+    print('Loading model...')
     model = LLM('gpt2')
     benchmark = Benchmark('mmlu')
     benchmark.run(model, num_samples=30)
