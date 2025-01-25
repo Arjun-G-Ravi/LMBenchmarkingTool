@@ -11,14 +11,15 @@ class MMLU:
         from LMBenchmarkingTool import prompting_template1, _progress_bar
         score = 0
         mapping = {0:'A', 1:'B', 2:'C', 3:'D'}
-        if model.return_loss == False:
-            print('Set model.return_loss to be True') # warning
-            raise 'Error'
+        assert model.return_loss == True, 'Set model.return_loss to be True'
+
+        
         if num_samples is None:
             num_samples = len(self.ds['test'])
-        print(self.ds['test'])
+
         tot = min(num_samples, len(self.ds['test']))
         print('Total benchmarks:',tot)
+        
         for i in range(tot):
             question = self.ds['test']['question'][i]
             choices = self.ds['test']['choices'][i]
