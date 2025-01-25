@@ -19,5 +19,5 @@ if __name__ == '__main__':
     from warnings import filterwarnings
     filterwarnings('ignore')
     model = LLM('gpt2')
-    benchmark = Benchmark('mmlu', subset='all')
+    benchmark = Benchmark('mmlu')
     benchmark.run(model, num_samples=30)

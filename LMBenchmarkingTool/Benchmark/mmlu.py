@@ -19,7 +19,6 @@ class MMLU:
         tot = min(num_samples, len(self.ds['test']))
         print('Total benchmarks:',tot)
         for i in range(tot):
-            _progress_bar(i, tot)
             question = self.ds['test']['question'][i]
             choices = self.ds['test']['choices'][i]
             choices_out = ''
@@ -43,8 +42,9 @@ class MMLU:
             if predicted_choice == correct_answer:
                 # print('Correct')
                 score += 1
+            _progress_bar(i+1, tot)
         
-        print(f'-'*20)
+        print('\n' + f'-'*20)
         print('BENCHMARKING RESULTS:')
         print(f'Total questions: {tot}')
         print(f'Correct Answers {score}' )
