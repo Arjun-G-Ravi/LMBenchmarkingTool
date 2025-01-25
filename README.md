@@ -25,3 +25,34 @@ model = huggingface-model()
 benchmark = Benchmark('benchmark_name', 'subset_name', 'metric_name')
 benchmark.run(model)
 ```
+
+# Benchmarks
+
+### Knowledge
+- [x] MMLU (Massive Multitask Language Understanding) 
+- [ ] SQuAD (Stanford Question Answering Dataset) 
+- [ ] OpenBookQA
+
+### Coding
+- [ ] GLUE (General Language Understanding Evaluation) 
+- [ ] SuperGLUE
+- [ ] HumanEval
+- [ ] CodeXGLUE
+
+### Reasoning, Common sense
+- [ ] Hellaswag
+- [ ] BIG-bench (also knowledge)
+- [ ] HELM(Holistic Evaluation of Language Models)
+- [ ] TruthfulQA
+- [ ] PIQA (Physical Interaction Question Answering)
+- [ ] StoryCloze
+
+### English Language Understanding
+- [ ] LAMBADA
+
+### Other Languages
+- [ ] TyDi QA
+
+### Math
+- [ ] MATH (Mathematics Dataset)
+- [ ] GSM8K (Grade School Math 8K)

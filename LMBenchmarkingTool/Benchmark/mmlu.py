@@ -44,7 +44,7 @@ class MMLU:
                 score += 1
             _progress_bar(i+1, tot)
         
-        print('\n' + f'-'*20)
+        print('\n')
         print('BENCHMARKING RESULTS:')
         print(f'Total questions: {tot}')
         print(f'Correct Answers {score}' )
