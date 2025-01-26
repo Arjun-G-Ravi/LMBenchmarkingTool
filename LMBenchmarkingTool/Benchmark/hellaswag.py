@@ -6,9 +6,8 @@ class Hellaswag:
     
     def run(self, model, num_samples=None):
         print('Hellaswag Benchmarking Started...')
-        from LMBenchmarkingTool import prompting_template1, _progress_bar
+        from LMBenchmarkingTool import _progress_bar
         score = 0
-        mapping = {0:'A', 1:'B', 2:'C', 3:'D'}
         assert model.return_loss == True, 'Set model.return_loss to be True'
         
         if num_samples is None:
@@ -23,7 +22,7 @@ class Hellaswag:
             endings = self.ds['validation']['endings'][i]
             correct_answer = int(self.ds['validation']['label'][i])
 
-            if len(endings) != 4:
+            if len(endings) != 4: # maybe make this better
                 print('No 4 endings')
                 continue
 

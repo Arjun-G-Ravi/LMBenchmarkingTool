@@ -56,3 +56,9 @@ benchmark.run(model)
 ### Math
 - [ ] MATH (Mathematics Dataset)
 - [ ] GSM8K (Grade School Math 8K)
+
+More
+- Codeforces
+- LiveCodeBench
+- AIME 2024
+- GPTQ Diamond

@@ -23,7 +23,7 @@ if __name__ == '__main__':
     from warnings import filterwarnings
     filterwarnings('ignore')
     print('Loading model...')
-    model = LLM('Arjun-G-Ravi/chat-GPT2')
+    model = LLM('gpt2')
     benchmark = Benchmark('hellaswag')
-    benchmark.run(model, num_samples=30)
+    benchmark.run(model, num_samples=10)
 
