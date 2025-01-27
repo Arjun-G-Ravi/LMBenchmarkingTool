@@ -40,7 +40,7 @@ benchmark.run(model)
 - [ ] CodeXGLUE
 
 ### Reasoning, Common sense
-- [ ] Hellaswag
+- [x] Hellaswag
 - [ ] BIG-bench (also knowledge)
 - [ ] HELM(Holistic Evaluation of Language Models)
 - [ ] TruthfulQA
