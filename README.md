@@ -34,7 +34,6 @@ benchmark.run(model)
 - [ ] OpenBookQA
 
 ### Coding
-- [ ] GLUE (General Language Understanding Evaluation) 
 - [ ] SuperGLUE
 - [ ] HumanEval
 - [ ] CodeXGLUE
@@ -46,6 +45,8 @@ benchmark.run(model)
 - [ ] TruthfulQA
 - [ ] PIQA (Physical Interaction Question Answering)
 - [ ] StoryCloze
+- [ ] GLUE (General Language Understanding Evaluation) 
+
 
 ### English Language Understanding
 - [ ] LAMBADA
