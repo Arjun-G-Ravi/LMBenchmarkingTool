@@ -37,6 +37,8 @@ benchmark.run(model)
 - [ ] SuperGLUE
 - [ ] HumanEval
 - [ ] CodeXGLUE
+- [ ] SWE Benchmark
+- [ ] Codeforces
 
 ### Reasoning, Common sense
 - [x] Hellaswag
