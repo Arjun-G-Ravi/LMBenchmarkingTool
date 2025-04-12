@@ -1,13 +1,14 @@
 class LLM:
     def __init__(self, model_name, temperature=0.1, max_length=80, base_prompt='', device='cuda', calculate_loss=True):
-        from transformers import pipeline 
+        from transformers import pipeline
         self.generator = pipeline(
-        'text-generation', 
-        model=model_name, 
-        max_length=max_length,
-        temperature=temperature,
-        device=device,
-        truncation=True)
+                        'text-generation', 
+                        model=model_name, 
+                        max_length=max_length,
+                        temperature=temperature,
+                        device=device,
+                        truncation=True)
+        self.device = device 
         self.temperature = temperature
         self.max_length = max_length
         self.base_prompt = base_prompt
@@ -16,7 +17,7 @@ class LLM:
         if self.return_loss:
             from transformers import AutoTokenizer, AutoModelForCausalLM
             self.model = AutoModelForCausalLM.from_pretrained(model_name)
-            self.tokenizer =  AutoTokenizer.from_pretrained(model_name)
+            self.tokenizer = AutoTokenizer.from_pretrained(model_name, device=self.device)
 
 
     def generate_response(self, text, add_base_prompt=True):
@@ -26,15 +27,19 @@ class LLM:
     def calculate_loss(self, text, add_base_prompt=True):
         assert self.return_loss == True, 'Set the LLM parameter return_loss = True'
         import torch
-
-        if add_base_prompt: text = self.base_prompt+text
-        inputs = self.tokenizer(text, return_tensors="pt", add_special_tokens=True)
+        if add_base_prompt:
+            text = self.base_prompt+text
+        inputs = self.tokenizer(text, return_tensors="pt", add_special_tokens=True).to('cuda')
         
+        if self.device == 'cuda' and torch.cuda.is_available():
+            self.model = self.model.to('cuda')
+        else:
+            print('Using cpu')
         with torch.no_grad():
             outputs = self.model(
                 input_ids=inputs['input_ids'], 
                 attention_mask=inputs['attention_mask'], 
-                labels=inputs['input_ids']
+                labels=inputs['input_ids'],
             )
             loss = outputs.loss.item()
             return loss
