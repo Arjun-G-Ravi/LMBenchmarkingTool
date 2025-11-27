@@ -1,64 +1,74 @@
 # LMBenchmarkingTool
-A benchmarking tool for Language models
+A benchmarking tool for Language models.
 
-
-This library is made for easy bemchmarking of language models on popular benchmarks.
-
-# Initial Setup
--run on different huggingface models
-- run on popular benchmarks like MMLU, GLUE, SuperGLUE, SQuAD, etc.
-- run on popular metrics like F1, Accuracy, etc.
-- properly visualize the results(matplotlib)
-- Right now, you will be able to run only one benchmark on one model at a time.
-
-# Future plans
-- run on my own custom models
-- run on multiple benchmarks at a time
-- run on multiple models at a time
-
+Mission: This library is made for easy bemchmarking of language models on popular benchmarks. I want to load any huggingface model and run any popular benchmark on it with just a few lines of code.
 
 I want to  be able to do:
 
 ```python
-from LMBenchmarkingTool import Benchmark
-model = huggingface-model()
+from LMBenchmarkingTool import Benchmark, LLM
+model = LLM('huggingface-model-name')
 benchmark = Benchmark('benchmark_name', 'subset_name', 'metric_name')
 benchmark.run(model)
 ```
 
-# Benchmarks
+# Version 1.0 Target
+- A basic implementation that can:
+  - load any huggingface model
+  - run on any popular benchmark on the model in around 5 lines of code
+  - show progress bar with time left and time taken
+  - support popular benchmarking metrics
+  - proper visualiaation of results 
+
+# Future plans
+- support for ollama models
+- support without ollama and huggingface
+
+# Benchmarks Support for Version 1.0
 
 ### Knowledge
 - [x] MMLU (Massive Multitask Language Understanding) 
 - [ ] SQuAD (Stanford Question Answering Dataset) 
-- [ ] OpenBookQA
+- [ ] TriviaQA
+- [ ] GPQA (Graduate-Level Google-Proof Q&A) 
 
 ### Coding
-- [ ] SuperGLUE
-- [ ] HumanEval
-- [ ] CodeXGLUE
 - [ ] SWE Benchmark
-- [ ] Codeforces
+- [ ] CodeXGLUE
+- [ ] HumanEval
+- [ ] MBPP (Mostly Basic Programming Problems) 
+- [ ] LiveCodeBench
+- [ ] Codeforces (optional)
 
 ### Reasoning, Common sense
 - [x] Hellaswag
-- [ ] BIG-bench (also knowledge)
+- [ ] BIG-bench (also a test for knowledge)
 - [ ] HELM(Holistic Evaluation of Language Models)
 - [ ] TruthfulQA
+- [ ] HLE (Humanity's Last Exam)    
 - [ ] PIQA (Physical Interaction Question Answering)
-- [ ] StoryCloze
-- [ ] GLUE (General Language Understanding Evaluation) 
-
+- [ ] SuperGLUE
+- [ ] GLUE (General Language Understanding Evaluation) (optional)
 
 ### English Language Understanding
 - [ ] LAMBADA
+- [ ] Winograd Schema Challenge
 
-### Other Languages
+### Multilingual
 - [ ] TyDi QA
+- [ ] T5 Eval
+- [ ] XGLUE (optional)
+- [ ] C-Eval (optional)
 
 ### Math
 - [ ] MATH (Mathematics Dataset)
 - [ ] GSM8K (Grade School Math 8K)
+- [ ] AIME 2024
+- [ ] GSM-Hard (optional)
+
+## Other
+- [ ] Arc 1
+- [ ] Arc 2
 
 More
 - Codeforces
