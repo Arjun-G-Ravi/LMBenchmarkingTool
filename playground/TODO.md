@@ -1,4 +1,14 @@
 # TO-DO
+- [ ] Get all or majority of the benchmarks working
 - [ ] Enable the feature for the user to be able to use techniques like few-shot benchmark, zero-shot benchmark, etc.
 - [ ] Add the feature to show time left and time taken in progress bar
 - [ ] Allow the user to provide custom prompts to the LLMs
+- [ ] llow passing **kwargs in your LLM constructor to forward arguments to AutoModelForCausalLM.
+- [ ] Your Benchmark class needs to know which "mode" it is in: Generative (expensive, slow) vs LogProb (fast, deterministic). The user should be aware of this because Generative benchmarks take much longer.
+- [ ] Do not hardcode prompts inside the Benchmark class. Create a separate PromptManager or a dictionary of templates. You need to adhere to the "Standard" prompt formats used by the Open LLM Leaderboard to make your tool credible.
+- [ ] Batching is Mandatory, Not Optional: Use tokenizer(list_of_texts, padding=True, return_tensors="pt"). If you don't implement batching, an MMLU run will take hours instead of minutes.
+- [ ] Implement a caching system immediately. Before running a specific question ID, check a local .jsonl file to see if it has already been answered.
+- [ ] Also implement a way to resume interrupted runs, manual or crashes
+- [ ] save raw outputs of the model to a file
+- [ ] Allow running from terminal without a Python script: benchmark-tool --model meta-llama/Llama-2-7b --task mmlu
+- [ ] 

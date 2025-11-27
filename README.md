@@ -49,6 +49,8 @@ benchmark.run(model)
 - [ ] PIQA (Physical Interaction Question Answering)
 - [ ] SuperGLUE
 - [ ] GLUE (General Language Understanding Evaluation) (optional)
+- [ ] Arc 1
+- [ ] Arc 2
 
 ### English Language Understanding
 - [ ] LAMBADA
@@ -65,13 +67,3 @@ benchmark.run(model)
 - [ ] GSM8K (Grade School Math 8K)
 - [ ] AIME 2024
 - [ ] GSM-Hard (optional)
-
-## Other
-- [ ] Arc 1
-- [ ] Arc 2
-
-More
-- Codeforces
-- LiveCodeBench
-- AIME 2024
-- GPTQ Diamond
