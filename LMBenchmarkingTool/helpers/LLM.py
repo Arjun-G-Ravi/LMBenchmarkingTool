@@ -11,9 +11,8 @@ class LLM:
         dtype = torch.float16
 
 
-        if not self.return_loss:
-            from transformers import pipeline
-            self.generator = pipeline(
+        from transformers import pipeline
+        self.generator = pipeline(
                         'text-generation', 
                         model=model_name, 
                         max_length=max_length,
@@ -22,15 +21,15 @@ class LLM:
                         truncation=True,
                         dtype= dtype
                         )
-        else:
+        if calculate_loss:
             from transformers import AutoTokenizer, AutoModelForCausalLM
-            self.model = AutoModelForCausalLM.from_pretrained(model_name)
-            self.tokenizer = AutoTokenizer.from_pretrained(model_name, device=self.device)
+            # self.model = AutoModelForCausalLM.from_pretrained(model_name)
+            # self.tokenizer = AutoTokenizer.from_pretrained(model_name, device=self.device)
             self.model = self.generator.model
-            # self.tokenizer = self.generator.tokenizer
+            self.tokenizer = self.generator.tokenizer
             
-            # # Ensure model is in evaluation mode
-            # self.model.eval()
+            # Ensure model is in evaluation mode
+            self.model.eval()
 
 
     def generate_response(self, text, add_base_prompt=True):
