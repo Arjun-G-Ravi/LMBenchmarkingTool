@@ -1,14 +1,37 @@
-# TO-DO
-- [ ] Get all or majority of the benchmarks working
-- [ ] Enable the feature for the user to be able to use techniques like few-shot benchmark, zero-shot benchmark, etc.
-- [ ] Add the feature to show time left and time taken in progress bar
-- [ ] Allow the user to provide custom prompts to the LLMs
-- [ ] llow passing **kwargs in your LLM constructor to forward arguments to AutoModelForCausalLM.
-- [ ] Your Benchmark class needs to know which "mode" it is in: Generative (expensive, slow) vs LogProb (fast, deterministic). The user should be aware of this because Generative benchmarks take much longer.
-- [ ] Do not hardcode prompts inside the Benchmark class. Create a separate PromptManager or a dictionary of templates. You need to adhere to the "Standard" prompt formats used by the Open LLM Leaderboard to make your tool credible.
-- [ ] Batching is Mandatory, Not Optional: Use tokenizer(list_of_texts, padding=True, return_tensors="pt"). If you don't implement batching, an MMLU run will take hours instead of minutes.
-- [ ] Implement a caching system immediately. Before running a specific question ID, check a local .jsonl file to see if it has already been answered.
-- [ ] Also implement a way to resume interrupted runs, manual or crashes
-- [ ] save raw outputs of the model to a file
-- [ ] Allow running from terminal without a Python script: benchmark-tool --model meta-llama/Llama-2-7b --task mmlu
-- [ ] 
+# VERSION 1.0 TODOs
+
+### 1. Core Architecture (The Skeleton)
+- [ ] Implement `LLM` class with `**kwargs` support (forward args to `AutoModelForCausalLM`).
+- [ ] Implement `device_map="auto"` logic to automatically handle CUDA/MPS/CPU.
+- [ ] Implement `Tokenizer` logic with mandatory **Batching** (`padding=True`, `return_tensors="pt"`).
+
+### 2. The Benchmark Engine (The Brains)
+- [ ] Create Base `Benchmark` class.
+- [ ] Implement **"Mode" differentiation**:
+  - [ ] Mode A: **LogProbability** (for MMLU, ARC, HellaSwag) -> Returns token probabilities.
+  - [ ] Mode B: **Generative** (for GSM8K) -> Returns generated string.
+- [ ] Create `PromptManager` / Template Dictionary (separate from logic).
+- [ ] **Implement "Scoring" Logic:**
+  - [ ] Exact Match (for Multiple Choice).
+  - [ ] Regex Extraction + Equivalence (for GSM8K Math).
+
+### 3. The Tasks (The Big 4)
+- [ ] Implement ARC Challenge (Start here - Easiest LogProb task).
+- [ ] Implement HellaSwag (LogProb).
+- [ ] Implement MMLU (Complex LogProb prompts).
+- [ ] Implement GSM8K (Generative + Regex Parsing).
+
+### 4. Resilience & Performance
+- [ ] Implement **Caching / State Saving**:
+  - [ ] Check for existing `.jsonl` results file before running a sample.
+  - [ ] Append new results to file immediately after processing.
+  - [ ] Logic to skip already-processed IDs (Resume functionality).
+- [ ] Feature: Configure Zero-shot vs. Few-shot (n-shot) prompts.
+
+### 5. User Experience (UX)
+- [ ] Progress Bar (Rich/tqdm) showing:
+  - [ ] Progress %
+  - [ ] Time Elapsed / Time Remaining
+  - [ ] Current Running Average Score (optional).
+- [ ] CLI Entry Point (`benchmark-tool --model ...`).
+- [ ] **Final Report Generation:** Export a clean `summary.json` or print a final table with the score.

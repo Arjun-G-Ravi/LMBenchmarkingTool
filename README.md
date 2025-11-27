@@ -12,19 +12,7 @@ benchmark = Benchmark('benchmark_name', 'subset_name', 'metric_name')
 benchmark.run(model)
 ```
 
-# Version 1.0 Target
-- A basic implementation that can:
-  - load any huggingface model
-  - run on any popular benchmark on the model in around 5 lines of code
-  - show progress bar with time left and time taken
-  - support popular benchmarking metrics
-  - proper visualiaation of results 
-
-# Future plans
-- support for ollama models
-- support without ollama and huggingface
-
-# Benchmarks Support for Version 1.0
+# Benchmarks Support for future Versions
 
 ### Knowledge
 - [x] MMLU (Massive Multitask Language Understanding) 
