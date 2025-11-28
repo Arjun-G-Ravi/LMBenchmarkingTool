@@ -1,4 +1,4 @@
 from LMBenchmarkingTool import Benchmark, LLM
-model = LLM('Qwen/Qwen2.5-3B-Instruct')
+model = LLM('Qwen/Qwen2.5-3B-Instruct', device_map='cpu')
 benchmark = Benchmark('mmlu')
 benchmark.run(model, num_samples=100) 

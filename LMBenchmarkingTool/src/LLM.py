@@ -1,9 +1,14 @@
+from transformers import pipeline
 
 import torch
 
 class LLM:
-    def __init__(self, model_name, temperature=0.1, max_length=80, base_prompt='', device='cuda', calculate_loss=True):
-        self.device = device 
+    def __init__(self, model_name, temperature=0.1, max_length=80, base_prompt='', device_map='auto', calculate_loss=True):
+        if device_map == 'auto': 
+            self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        else:
+            self.device = device_map
+            assert self.device in ['cpu', 'cuda', 'mps'], 'Device map should be cpu, mps or cuda'
         self.temperature = temperature
         self.max_length = max_length
         self.base_prompt = base_prompt
@@ -11,25 +16,20 @@ class LLM:
         dtype = torch.float16
 
 
-        from transformers import pipeline
         self.generator = pipeline(
                         'text-generation', 
                         model=model_name, 
                         max_length=max_length,
                         temperature=temperature,
-                        device=device,
+                        device=self.device,
                         truncation=True,
                         dtype= dtype
                         )
         if calculate_loss:
-            from transformers import AutoTokenizer, AutoModelForCausalLM
-            # self.model = AutoModelForCausalLM.from_pretrained(model_name)
-            # self.tokenizer = AutoTokenizer.from_pretrained(model_name, device=self.device)
             self.model = self.generator.model
             self.tokenizer = self.generator.tokenizer
             
-            # Ensure model is in evaluation mode
-            self.model.eval()
+        self.model.eval()
 
 
     def generate_response(self, text, add_base_prompt=True):
@@ -41,12 +41,10 @@ class LLM:
         import torch
         if add_base_prompt:
             text = self.base_prompt+text
-        inputs = self.tokenizer(text, return_tensors="pt", add_special_tokens=True).to('cuda')
+        inputs = self.tokenizer(text, return_tensors="pt", add_special_tokens=True).to(self.device)
         
         if self.device == 'cuda' and torch.cuda.is_available():
-            self.model = self.model.to('cuda')
-        else:
-            print('Using cpu')
+            self.model = self.model.to(self.device)
         with torch.no_grad():
             outputs = self.model(
                 input_ids=inputs['input_ids'], 
