@@ -1,4 +1,5 @@
 from datasets import load_dataset
+from tqdm import tqdm, trange
 
 class Hellaswag:
     def __init__(self):
@@ -17,7 +18,7 @@ class Hellaswag:
         tot = min(num_samples, len(self.ds['validation']))
         print('Total benchmarks:', tot)
 
-        for i in range(tot):
+        for i in trange(tot):
             context = self.ds['validation']['ctx_a'][i]
             endings = self.ds['validation']['endings'][i]
             correct_answer = int(self.ds['validation']['label'][i])
@@ -37,7 +38,7 @@ class Hellaswag:
 
             if predicted_choice == correct_answer:
                 score += 1            
-            _progress_bar(i+1, tot)
+            # _progress_bar(i+1, tot)
         
         print('\n')
         print('BENCHMARKING RESULTS:')
