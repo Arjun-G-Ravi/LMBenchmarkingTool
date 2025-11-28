@@ -1,5 +1,4 @@
 from transformers import pipeline
-
 import torch
 
 class LLM:
@@ -33,12 +32,14 @@ class LLM:
 
 
     def generate_response(self, text, add_base_prompt=True):
-        if add_base_prompt: return self.generator(self.base_prompt+text, num_return_sequences=1)[0]['generated_text']
-        else: return self.generator(text, num_return_sequences=1)[0]['generated_text']
+        if add_base_prompt: 
+            return self.generator(self.base_prompt+text, num_return_sequences=1)[0]['generated_text']
+        else: 
+            return self.generator(text, num_return_sequences=1)[0]['generated_text']
     
     def calculate_loss(self, text, add_base_prompt=True):
+        '''calculate cross entropy loss'''
         assert self.return_loss == True, 'Set the LLM parameter return_loss = True'
-        import torch
         if add_base_prompt:
             text = self.base_prompt+text
         inputs = self.tokenizer(text, return_tensors="pt", add_special_tokens=True).to(self.device)

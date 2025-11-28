@@ -1,4 +1,6 @@
 # LMBenchmarkingTool
+# LLMBenchCore
+# LLMBenchTool
 A benchmarking tool for Language models.
 
 Mission: This library is made for easy bemchmarking of language models on popular benchmarks. I want to load any huggingface model and run any popular benchmark on it with just a few lines of code.
